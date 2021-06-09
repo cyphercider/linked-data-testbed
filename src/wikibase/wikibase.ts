@@ -1,6 +1,7 @@
 import axios from "axios"
-import { firstWorking, parentBach } from "./sparql.examples"
-import { WikibaseQueryResult } from "./wikibase.types"
+
+import { parentBach } from "./sparql.examples"
+import { rawEntityToFormattedEntity, WikibaseEntity, WikibaseQueryResult } from "./wikibase.types"
 
 const WBK = require("wikibase-sdk")
 
@@ -8,18 +9,27 @@ const wikibaseApi = WBK({
   instance: "https://www.wikidata.org",
   sparqlEndpoint: "https://query.wikidata.org/sparql",
 })
-async function wikibase(): Promise<void> {
+async function tryEntity(): Promise<void> {
+  // get entity
   try {
     const res = await getSparqlResults(parentBach)
     for (const item of res.results.bindings) {
       console.log(item)
       const id = entityIdFromUri(item.entity.value)
-      await getEntityById(id)
+      const entity = await getEntityById(id)
+      console.log(entity)
     }
-    // await getOneEntity()
   } catch (err) {
     console.log(`Error calling wikibase `, err.response.data)
   }
+}
+
+async function trySchemaItem(): Promise<> {
+  // get schema item
+  try {
+    const res = await getEntityById("P2600")
+    console.log(`schema item`, res)
+  } catch (err) {}
 }
 
 async function getSparqlResults(sparqlQuery: string): Promise<WikibaseQueryResult> {
@@ -28,12 +38,15 @@ async function getSparqlResults(sparqlQuery: string): Promise<WikibaseQueryResul
   return res.data
 }
 
-export async function getEntityById(id: string): Promise<void> {
+export async function getEntityById(id: string): Promise<WikibaseEntity> {
   const url = wikibaseApi.getEntities({
     ids: [id],
   })
   const res = await axios.get(url)
-  console.log(res.data)
+
+  const rawEntity = res?.data?.entities[id]
+  const entity = rawEntityToFormattedEntity(rawEntity)
+  return entity
 }
 
 function entityIdFromUri(uri: string) {
@@ -42,4 +55,5 @@ function entityIdFromUri(uri: string) {
   return id
 }
 
-wikibase()
+// tryEntity()
+trySchemaItem()

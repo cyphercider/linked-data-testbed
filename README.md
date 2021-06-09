@@ -1,5 +1,8 @@
 # linked data testbed
 
+_NEXT TODOS_
+figure out how to query schema information
+
 For testing out various linked data apis
 
 # List of free linked data apis
@@ -8,8 +11,6 @@ For testing out various linked data apis
 
 https://github.com/maxlath/wikibase-sdk
 https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
-
-// TODO - figure out how to get schema definitions
 
 ### Reverse claims (relations)
 
