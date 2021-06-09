@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "watch": "tsc -w",
-    "run": "node ./dist/main.js"
+    "wikidata": "node ./dist/wikidata/wikidata.js",
+    "wikibase": "node ./dist/wikibase/wikibase.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "wikibase-sdk": "^7.13.0",
     "wikidata-sdk": "^7.11.1"
   },
   "devDependencies": {

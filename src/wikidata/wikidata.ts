@@ -11,7 +11,7 @@ import path from "path"
 // }
 
 async function getdata(): Promise<void> {
-  const searchUri = wbk.searchEntities("Ingmar Bergman")
+  const searchUri = wbk.searchEntities("Abraham Lincoln")
 
   console.log(searchUri)
 
