@@ -1,7 +1,10 @@
 # linked data testbed
 
 _NEXT TODOS_
-figure out how to query schema information
+
+1. Figure out how I can preload all schema information or a subset from wikibase
+2. Figure out how I can most efficiently search wikibase items
+3. Figure out how I want to lay out the view in worldgraph
 
 For testing out various linked data apis
 

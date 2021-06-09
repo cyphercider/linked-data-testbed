@@ -24,7 +24,7 @@ async function tryEntity(): Promise<void> {
   }
 }
 
-async function trySchemaItem(): Promise<> {
+async function trySchemaItem(): Promise<void> {
   // get schema item
   try {
     const res = await getEntityById("P2600")
