@@ -9,7 +9,11 @@ For testing out various linked data apis
 https://github.com/maxlath/wikibase-sdk
 https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
 
-// TODO - figure out how to get schema
+// TODO - figure out how to get schema definitions
+
+### Reverse claims (relations)
+
+https://github.com/maxlath/wikibase-sdk/blob/master/docs/get_entities_reverse_claims.md
 
 ## wikidata
 

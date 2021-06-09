@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "tsc -w",
-    "wikidata": "node ./dist/wikidata/wikidata.js",
-    "wikibase": "node ./dist/wikibase/wikibase.js"
+    "wikibase": "node ./dist/wikibase.js"
   },
   "author": "",
   "license": "ISC",
