@@ -1,7 +1,10 @@
 import axios from "axios"
 
-import { parentBach } from "./sparql.examples"
+import { parentBachQuery } from "./sparql.examples"
 import { rawEntityToFormattedEntity, WikibaseEntity, WikibaseQueryResult } from "./wikibase.types"
+import path from "path"
+import fs from "fs"
+import { relative } from "node:path"
 
 const WBK = require("wikibase-sdk")
 
@@ -9,26 +12,27 @@ const wikibaseApi = WBK({
   instance: "https://www.wikidata.org",
   sparqlEndpoint: "https://query.wikidata.org/sparql",
 })
-async function tryEntity(): Promise<void> {
+async function getSampleEntity(): Promise<void> {
   // get entity
+  const res = await getSparqlResults(parentBachQuery)
   try {
-    const res = await getSparqlResults(parentBach)
     for (const item of res.results.bindings) {
       console.log(item)
       const id = entityIdFromUri(item.entity.value)
       const entity = await getEntityById(id)
-      console.log(entity)
+      writeJsonToFile("entity_bach.json", entity)
     }
   } catch (err) {
     console.log(`Error calling wikibase `, err.response.data)
   }
 }
 
-async function trySchemaItem(): Promise<void> {
+async function getSampleSchemaItem(): Promise<void> {
   // get schema item
+  const wikidataEntityId = "P2600"
   try {
     const res = await getEntityById("P2600")
-    console.log(`schema item`, res)
+    writeJsonToFile(`schema_entity_${wikidataEntityId}.json`, res)
   } catch (err) {}
 }
 
@@ -55,5 +59,11 @@ function entityIdFromUri(uri: string) {
   return id
 }
 
-// tryEntity()
-trySchemaItem()
+function writeJsonToFile(fileName: string, object: Object) {
+  const dir = path.join(__dirname, "../data", fileName)
+  fs.writeFileSync(dir, JSON.stringify(object), { encoding: "utf-8" })
+  console.log(`data written to ${dir}`)
+}
+
+getSampleEntity()
+getSampleSchemaItem()

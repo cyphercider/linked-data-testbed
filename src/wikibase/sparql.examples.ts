@@ -9,7 +9,7 @@ SELECT ?entity ?date ?itemLabel WHERE {
 LIMIT 5
 `
 
-export const parentBach = `
+export const parentBachQuery = `
 SELECT ?entity 
 WHERE
 {
